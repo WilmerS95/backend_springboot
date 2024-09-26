@@ -2,13 +2,28 @@ package com.solutec.springboot.backend.apirest.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
+import org.springframework.security.config.annotation.SecurityBuilder;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-//@Configuration
+@Configuration
 //@EnableWebSecurity
-public class SpringSecurityConfig /* implements WebSecurityConfigurerAdapter */  {
+public class SpringSecurityConfig  implements WebSecurityConfigurer    {
 	
-	//@Autowired
-	//private UserDetailsService usuarioService;
+	@Autowired
+	private UserDetailsService usuarioService;
+
+	@Override
+	public void init(SecurityBuilder builder) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configure(SecurityBuilder builder) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 
