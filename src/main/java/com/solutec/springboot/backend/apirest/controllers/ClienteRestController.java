@@ -8,14 +8,22 @@ import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import com.solutec.springboot.backend.apirest.models.entity.AuthResponse;
 import com.solutec.springboot.backend.apirest.models.entity.Cliente;
+import com.solutec.springboot.backend.apirest.models.entity.LoginRequest;
+import com.solutec.springboot.backend.apirest.models.entity.RegisterRequest;
 import com.solutec.springboot.backend.apirest.models.services.IClienteService;
+
+import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins= {"*"})
 //@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/auth")
+@RequiredArgsConstructor
 public class ClienteRestController {
+	
+	private final AuthService authService = new AuthService();
 	
 	@Autowired
 	private IClienteService clienteService;
@@ -113,5 +121,16 @@ public class ClienteRestController {
 		response.put("Mensaje", "El cliente id:".concat(id.toString().concat(" ha sido eliminado exitosamente")));
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+	
+	@PostMapping(value = "login")
+	public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+		return ResponseEntity.ok(authService.login(request));
+	}
+	
+	@PostMapping(value = "register")
+	public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+		return ResponseEntity.ok(authService.register(request));
+	}
+
 
 }
